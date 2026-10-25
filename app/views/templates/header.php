@@ -22,6 +22,7 @@
             <div class="navbar-nav">
             <a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>">Home</a>
             <a class="nav-link" href="<?= BASEURL; ?>/about">About</a>
+            <a class="nav-link" href="<?= BASEURL; ?>/jetfighter">Fighter Jets</a>
             </div>
         </div>
     </div>
