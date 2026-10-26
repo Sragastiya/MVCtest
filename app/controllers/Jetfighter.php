@@ -1,7 +1,8 @@
 <?php
-class JetFighter extends Controller {
+class Jetfighter extends Controller {
     public function index(): void{
-        $data['title'] = 'Fighter Jets';
+        $data['title'] = 'Fighter Jets Lists';
+        $data['jet'] = $this->model('Jet_model')->getALLjet();
         $this->view('templates/header', $data);
         $this->view('jets/index', $data);
         $this->view('templates/footer');

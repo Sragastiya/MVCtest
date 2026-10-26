@@ -5,7 +5,7 @@ class Controller{
     }
 
     public function model($model): object{
-        require_once '../app/models/' . $model . '.php';
+        require_once dirname(__DIR__) . '/../app/models/' . $model . '.php';
         return new $model;
     }
 }
