@@ -7,6 +7,7 @@
     <title><?= $data['title']; ?></title>
     <link href="<?= BASEURL; ?>/css/bootstrap.css"
     rel="stylesheet">
+    <link href="<?= BASEURL; ?>/css/tailwind.css" rel="stylesheet">
 </head>
 <body>
 

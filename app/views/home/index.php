@@ -7,6 +7,10 @@
             <hr>
             <p>Check this out</p>
             <a href="https://youtu.be/dQw4w9WgXcQ?si=KA79sFOhofrSPwln" class="btn btn-primary">Real Cool Button</a>
+            <div class="tw-mt-6 tw-rounded-lg tw-bg-blue-600 tw-p-6 tw-text-white">
+                <h2 class="tw-text-2xl tw-font-bold">Tailwind is working!</h2>
+                <p class="tw-mt-2">My first Tailwind-styled section.</p>
+            </div>
         </div>
     </div>
 </div>
