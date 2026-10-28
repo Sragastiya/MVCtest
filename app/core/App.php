@@ -8,7 +8,7 @@ class App {
         $url = $this->parseUrl();
 
         //controller
-        if (file_exists('../app/controllers/' . ucfirst($url[0]) . '.php')) {
+        if (isset($url[0]) && file_exists('../app/controllers/' . ucfirst($url[0]) . '.php')) {
             $this->controller=ucfirst($url[0]);
             unset($url[0]);
         }
@@ -47,5 +47,7 @@ class App {
 
             return $url;
         }
+
+        return [];
     }
 }

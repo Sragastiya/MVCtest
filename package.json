@@ -4,7 +4,8 @@
   "description": "A small PHP web application built from scratch with the **Model-View-Controller (MVC)** pattern and no framework. It was made for the *Pemrograman Web Berbasis Framework* (Framework Based Web Programming) course at Politeknik Negeri Bali, as groundwork before moving on to Laravel.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:css": "tailwindcss -i ./resources/css/input.css -o ./public/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./resources/css/input.css -o ./public/css/tailwind.css --watch"
   },
   "repository": {
     "type": "git",

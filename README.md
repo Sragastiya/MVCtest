@@ -8,8 +8,9 @@ A small PHP web application built from scratch with the **Model-View-Controller 
 - URL format `/controller/method/param1/param2`, falling back to `Home::index` when nothing matches
 - Base `Controller` class with `view()` and `model()` helpers
 - Shared `header.php` and `footer.php` templates, so the navbar is written once
-- Bootstrap 5 styling (navbar, hero section, rounded image)
-- `BASEURL` constant so asset links are defined in one place
+- Tailwind CSS 3 styling with the existing `tw-` class prefix
+- Alpine.js profile links and responsive mobile navigation
+- `BASEURL` derived from the current PHP script path, with an optional environment override
 - Database-backed page that lists fighter jets using PDO and prepared statements
 - `.htaccess` rules for clean URLs and for blocking directory listing in `app/`
 
@@ -39,8 +40,8 @@ MVCtest/
 └── public/
     ├── .htaccess              # rewrites every request to index.php?url=...
     ├── index.php              # entry point
-    ├── css/                   # Bootstrap CSS
-    ├── js/                    # Bootstrap JS
+    ├── css/                   # compiled Tailwind CSS; older Bootstrap files retained
+    ├── js/                    # local Alpine.js and older Bootstrap files
     └── img/
 ```
 
@@ -76,10 +77,36 @@ MVCtest/
    git clone https://github.com/Sragastiya/MVCtest.git
    ```
 2. Put the project where Apache can serve it (inside `htdocs`, or exposed through an Apache alias).
-3. Create a MySQL database named `phpmvc` with a table named `jet`. The view reads these columns: `name`, `manufacturer`, `country`, `role`. Add a few rows.
+3. Use a MySQL database named `phpmvc` with a table named `jet`. The view reads these columns: `name`, `manufacturer`, `country`, `role`. If your database already exists, do not recreate or re-import it. The SQL below is only an example for a fresh database. Check that any saved SQL export is non-empty before treating it as a backup.
 4. Check the connection settings in `app/models/Jet_model.php`. They default to host `localhost`, user `root`, empty password.
-5. Edit `app/core/Constants.php` so `BASEURL` matches your local address. It is currently `http://localhost/pain/MVC/public`.
-6. Start Apache and MySQL, then open the `BASEURL` address in a browser.
+5. Start Apache and MySQL. With this folder under Windows XAMPP's `htdocs`, open `http://localhost/MVC/public/`. `BASEURL` uses the directory of the current PHP script, so a Linux Apache alias can use a different URL without editing the PHP file. An alias mapping `/pain` directly to the project directory normally uses `/pain/public/`. The actual alias configuration determines the address.
+6. To override the base URL, set the `MVC_BASEURL` environment variable in the local server configuration. Keep this configuration local to each OS.
+
+## Tailwind and Alpine
+
+Tailwind 3.4.19 was already installed for this project. The generated CSS is committed, so viewing the site does not require Node.js or a running Tailwind process.
+
+After changing Tailwind classes, run from the project root:
+
+```sh
+npm run build:css
+```
+
+During development you can instead run:
+
+```sh
+npm run watch:css
+```
+
+The watch command rebuilds the stylesheet when a view changes; refresh the browser to see the result. This project does not use Laravel Vite or automatic browser reload.
+
+For a fresh dependency installation, use `npm ci`. On systems sharing the same checkout, rebuild dependencies on that OS only if the existing CLI fails. Do not upgrade to Tailwind 4 as part of this assignment: this configuration uses the Tailwind 3 CLI and directives.
+
+`resources/css/input.css` contains the Tailwind directives and the `x-cloak` rule. `tailwind.config.js` scans PHP files in `app/views/`, retains the `tw-` prefix, and defines Inter with Arial and sans-serif fallbacks. Inter is loaded from Google Fonts, so offline viewing uses the fallback font.
+
+Alpine 3.14.9 is served locally from `public/js/alpine-3.14.9.min.js`; its license is alongside it. Bootstrap and Popper are no longer loaded by the templates. Older Bootstrap assets are retained to avoid deleting the earlier class work.
+
+The navbar has separate state for the profile dropdown and mobile links. The shared header opens the page and `main`, and the footer closes them after each page view. The database query remains in `Jet_model`, the controller supplies data, and the jet view escapes text with `htmlspecialchars()`.
 
 Example SQL:
 
@@ -103,7 +130,7 @@ INSERT INTO jet (name, manufacturer, country, role) VALUES
 ## Notes
 
 - Database credentials are hardcoded for local learning purposes. Move them into a config file (and keep real passwords out of version control) before deploying anything.
-- `BASEURL` is also hardcoded, so it must be changed per machine.
+- `BASEURL` is detected from the request path. Use `MVC_BASEURL` for a local override when needed.
 
 ## Author
 

@@ -1,8 +1,7 @@
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-crossorigin="anonymous"></script>
-
-<script src="<?= BASEURL; ?>/js/bootstrap.js"></script>
-
+    </main>
+    <footer class="tw-mx-auto tw-max-w-7xl tw-px-4 tw-pb-8 tw-text-sm tw-text-slate-500 sm:tw-px-6 lg:tw-px-8">
+        Just some jets I think are cool.
+    </footer>
+</div>
 </body>
 </html>
